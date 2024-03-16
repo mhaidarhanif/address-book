@@ -8,16 +8,22 @@ const contacts = [
   {
     id: 2,
     fullName: "Elon Musk",
-    age: 50,
+    age: 52,
     phone: "+1234567890",
   },
   {
     id: 3,
     fullName: "Jeff Bezos",
-    age: 52,
+    age: 60,
     phone: "+1234567890",
   },
 ];
 
-console.log(contacts);
-console.log(contacts[0]);
+for (let index = 0; index < contacts.length; index++) {
+  const contact = contacts[index];
+  const ageCategory = contact.age > 30 ? "is old enough" : "is still young";
+
+  console.log(
+    `${contact.id}. ${contact.fullName} (${contact.phone}) ${ageCategory}`
+  );
+}
