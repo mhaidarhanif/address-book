@@ -19,11 +19,26 @@ const contacts = [
   },
 ];
 
-for (let index = 0; index < contacts.length; index++) {
-  const contact = contacts[index];
-  const ageCategory = contact.age > 30 ? "is old enough" : "is still young";
+function renderContacts() {
+  for (let index = 0; index < contacts.length; index++) {
+    const contact = contacts[index];
+    const ageCategory = contact.age > 30 ? "is old enough" : "is still young";
 
-  console.log(
-    `${contact.id}. ${contact.fullName} (${contact.phone}) ${ageCategory}`
-  );
+    console.log(
+      `${contact.id}. ${contact.fullName} (${contact.phone}) ${ageCategory}`
+    );
+  }
+  console.log("");
 }
+
+function addContact(fullName, age, phone) {
+  const lastId = contacts[contacts.length - 1].id;
+
+  contacts.push({ id: lastId + 1, fullName, age, phone });
+
+  renderContacts();
+}
+
+renderContacts();
+addContact("Mark", 40, "+123");
+addContact("Bill", 60, "+1456");
