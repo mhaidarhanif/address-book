@@ -39,6 +39,10 @@ function addContact(fullName, age, phone) {
   renderContacts();
 }
 
+function seachContact(keyword) {
+  // find / filter
+}
+
 renderContacts();
 addContact("Mark", 40, "+123");
 addContact("Bill", 60, "+1456");
