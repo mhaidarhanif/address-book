@@ -8,6 +8,44 @@
   <body>
     <h1>Address Book</h1>
 
+    <form id="add-contact-form" method="post">
+      <div>
+        <label for="full-name">Full name:</label>
+        <input
+          id="full-name"
+          name="fullName"
+          type="text"
+          placeholder="Elon Musk"
+          value="Elon Musk"
+        />
+      </div>
+      <div>
+        <label for="email">Email address:</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="elon@elon.com"
+          value="elon@elon.com"
+        />
+      </div>
+      <div>
+        <label for="phone">Phone number:</label>
+        <input
+          id="phone"
+          name="phone"
+          type="phone"
+          placeholder="+1234567890"
+          value="+1234567890"
+        />
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input id="age" name="age" type="number" placeholder="30" value="30" />
+      </div>
+      <button type="submit">Add Contact</button>
+    </form>
+
     <ul id="contacts-container">
       <!-- Contacts Data -->
       <li>Name</li>

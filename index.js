@@ -2,25 +2,27 @@ const contacts = [
   {
     id: 1,
     fullName: "M Haidar Hanif",
-    age: 30,
     phone: "+621234567890",
     email: "haidar@haidar.com",
+    age: 30,
   },
   {
     id: 2,
     fullName: "Elon Musk",
-    age: 52,
     phone: "+1234567890",
     email: "elon@elon.com",
+    age: 52,
   },
   {
     id: 3,
     fullName: "Jeff Bezos",
-    age: 60,
     phone: "+1234567890",
     email: "jeff@jeff.com",
+    age: 60,
   },
 ];
+
+const addContactFormElement = document.getElementById("add-contact-form");
 
 const contactsContainerElement = document.getElementById("contacts-container");
 
@@ -37,10 +39,10 @@ function renderContacts() {
   contactsContainerElement.innerHTML = contactItems;
 }
 
-function addContact(fullName, age, phone) {
+function addContact(fullName, email, phone, age) {
   const lastId = contacts[contacts.length - 1].id;
 
-  contacts.push({ id: lastId + 1, fullName, age, phone });
+  contacts.push({ id: lastId + 1, fullName, email, phone, age });
 
   renderContacts();
 }
@@ -58,3 +60,20 @@ function searchContact(keyword) {
 }
 
 renderContacts();
+
+addContactFormElement.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const contactFormData = new FormData(addContactFormElement);
+
+  const newContactData = {
+    fullName: contactFormData.get("fullName"),
+    email: contactFormData.get("email"),
+    phone: contactFormData.get("phone"),
+    age: Number(contactFormData.get("age")),
+  };
+
+  console.log(newContactData);
+
+  // addContact(fullName, email, phone, age)
+});
