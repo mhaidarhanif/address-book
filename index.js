@@ -39,10 +39,22 @@ function renderContacts() {
   contactsContainerElement.innerHTML = contactItems;
 }
 
-function addContact(fullName, email, phone, age) {
+function addContact(event) {
+  event.preventDefault();
+
+  const contactFormData = new FormData(addContactFormElement);
+
   const lastId = contacts[contacts.length - 1].id;
 
-  contacts.push({ id: lastId + 1, fullName, email, phone, age });
+  const newContact = {
+    id: lastId + 1,
+    fullName: contactFormData.get("fullName"),
+    email: contactFormData.get("email"),
+    phone: contactFormData.get("phone"),
+    age: Number(contactFormData.get("age")),
+  };
+
+  contacts.push(newContact);
 
   renderContacts();
 }
@@ -61,19 +73,4 @@ function searchContact(keyword) {
 
 renderContacts();
 
-addContactFormElement.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const contactFormData = new FormData(addContactFormElement);
-
-  const newContactData = {
-    fullName: contactFormData.get("fullName"),
-    email: contactFormData.get("email"),
-    phone: contactFormData.get("phone"),
-    age: Number(contactFormData.get("age")),
-  };
-
-  console.log(newContactData);
-
-  // addContact(fullName, email, phone, age)
-});
+addContactFormElement.addEventListener("submit", addContact);
