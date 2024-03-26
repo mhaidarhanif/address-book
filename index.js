@@ -4,31 +4,37 @@ const contacts = [
     fullName: "M Haidar Hanif",
     age: 30,
     phone: "+621234567890",
+    email: "haidar@haidar.com",
   },
   {
     id: 2,
     fullName: "Elon Musk",
     age: 52,
     phone: "+1234567890",
+    email: "elon@elon.com",
   },
   {
     id: 3,
     fullName: "Jeff Bezos",
     age: 60,
     phone: "+1234567890",
+    email: "jeff@jeff.com",
   },
 ];
 
-function renderContacts() {
-  for (let index = 0; index < contacts.length; index++) {
-    const contact = contacts[index];
-    const ageCategory = contact.age > 30 ? "is old enough" : "is still young";
+const contactsContainerElement = document.getElementById("contacts-container");
 
-    console.log(
-      `${contact.id}. ${contact.fullName} (${contact.phone}) ${ageCategory}`
-    );
-  }
-  console.log("");
+function renderContacts() {
+  const contactItemElements = contacts.map(
+    (contact) => `<li>
+  <h2>${contact.fullName}</h2>
+  <p>${contact.email}</p>
+  <p>${contact.phone}</p>
+</li>
+`
+  );
+  const contactItems = contactItemElements.join("");
+  contactsContainerElement.innerHTML = contactItems;
 }
 
 function addContact(fullName, age, phone) {
@@ -39,10 +45,16 @@ function addContact(fullName, age, phone) {
   renderContacts();
 }
 
-function seachContact(keyword) {
+function deleteContactById(id) {
+  // delete
+}
+
+function updateContactById(id) {
+  // delete
+}
+
+function searchContact(keyword) {
   // find / filter
 }
 
 renderContacts();
-addContact("Mark", 40, "+123");
-addContact("Bill", 60, "+1456");
