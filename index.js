@@ -1,4 +1,4 @@
-const contacts = [
+let contacts = [
   {
     id: 1,
     fullName: "M Haidar Hanif",
@@ -32,6 +32,9 @@ function renderContacts() {
   <h2>${contact.fullName}</h2>
   <p>${contact.email}</p>
   <p>${contact.phone}</p>
+  <div>
+    <button onclick="deleteContactById(${contact.id})">Delete</button>
+  </div>
 </li>
 `
   );
@@ -60,15 +63,21 @@ function addContact(event) {
 }
 
 function deleteContactById(id) {
-  // delete
-}
+  const updatedContacts = contacts.filter(
+    (contact) => contact.id !== Number(id)
+  );
 
-function updateContactById(id) {
-  // delete
+  contacts = updatedContacts;
+
+  renderContacts();
 }
 
 function searchContact(keyword) {
   // find / filter
+}
+
+function updateContactById(id) {
+  // delete
 }
 
 renderContacts();

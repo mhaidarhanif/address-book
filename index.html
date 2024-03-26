@@ -8,6 +8,13 @@
   <body>
     <h1>Address Book</h1>
 
+    <form id="search-contacts" method="get">
+      <input type="text" name="q" placeholder="Enter keyword..." />
+      <button type="submit">Search</button>
+    </form>
+
+    <hr />
+
     <form id="add-contact-form" method="post">
       <div>
         <label for="full-name">Full name:</label>
@@ -48,7 +55,6 @@
 
     <ul id="contacts-container">
       <!-- Contacts Data -->
-      <li>Name</li>
     </ul>
 
     <script src="index.js"></script>
