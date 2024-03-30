@@ -69,6 +69,7 @@ function addContact(event) {
   };
 
   contacts.push(newContact);
+
   renderContacts();
 }
 
@@ -82,7 +83,7 @@ function deleteContactById(id) {
 }
 
 function updateContactById(id) {
-  // delete
+  // update
 }
 
 window.addEventListener("load", renderContacts);
