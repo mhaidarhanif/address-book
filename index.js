@@ -68,8 +68,10 @@ function addContact(event) {
     age: Number(contactFormData.get("age")),
   };
 
-  contacts.push(newContact);
+  const updatedContacts = [...contacts, newContact];
+  contacts = updatedContacts;
 
+  addContactFormElement.reset();
   renderContacts();
 }
 
