@@ -80,11 +80,13 @@ function addContact(event) {
 }
 
 function deleteContactById(id) {
+  const contacts = loadContacts();
+
   const updatedContacts = contacts.filter(
     (contact) => contact.id !== Number(id)
   );
 
-  contacts = updatedContacts;
+  saveContacts(updatedContacts);
   renderContacts();
 }
 
