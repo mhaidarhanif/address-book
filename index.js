@@ -1,47 +1,46 @@
-let contacts = [
-  {
-    id: 1,
-    fullName: "M Haidar Hanif",
-    phone: "+621234567890",
-    email: "haidar@haidar.com",
-    age: 30,
-  },
-  {
-    id: 2,
-    fullName: "Elon Musk",
-    phone: "+1234567890",
-    email: "elon@elon.com",
-    age: 52,
-  },
-  {
-    id: 3,
-    fullName: "Jeff Bezos",
-    phone: "+1234567890",
-    email: "jeff@jeff.com",
-    age: 60,
-  },
-];
-
 const searchInputElement = document.getElementById("search-input");
 const addContactFormElement = document.getElementById("add-contact-form");
 const contactsContainerElement = document.getElementById("contacts-container");
 
+function saveContacts(contacts) {
+  localStorage.setItem("address-book", JSON.stringify(contacts));
+}
+
+function loadContacts() {
+  const contacts = localStorage.getItem("address-book");
+  if (!contacts) {
+    saveContacts([]);
+  }
+
+  try {
+    return JSON.parse(contacts);
+  } catch (error) {
+    console.error("Failed to laod contacts", error);
+  }
+}
+
+function searchContacts(contacts, keyword) {
+  searchInputElement.value = keyword;
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.fullName.toLowerCase().includes(keyword.toLowerCase())
+  );
+
+  return filteredContacts;
+}
+
 function renderContacts() {
+  const contacts = loadContacts();
+
   const queryString = window.location.search;
   const params = new URLSearchParams(queryString);
   const keyword = params.get("q");
 
-  if (keyword) {
-    searchInputElement.value = keyword;
+  const contactsToRender = keyword
+    ? searchContacts(contacts, keyword)
+    : contacts;
 
-    const filteredContacts = contacts.filter((contact) =>
-      contact.fullName.toLowerCase().includes(keyword.toLowerCase())
-    );
-
-    contacts = filteredContacts;
-  }
-
-  const contactItemElements = contacts.map(
+  const contactItemElements = contactsToRender.map(
     (contact) => `<li>
   <h2>${contact.fullName}</h2>
   <p>${contact.email}</p>
@@ -52,6 +51,7 @@ function renderContacts() {
 </li>
 `
   );
+
   const contactItems = contactItemElements.join("");
   contactsContainerElement.innerHTML = contactItems;
 }
@@ -60,8 +60,12 @@ function addContact(event) {
   event.preventDefault();
   const contactFormData = new FormData(addContactFormElement);
 
+  const contacts = loadContacts();
+
+  const newId = contacts.length ? contacts[contacts.length - 1].id + 1 : 1;
+
   const newContact = {
-    id: contacts[contacts.length - 1].id + 1,
+    id: newId,
     fullName: contactFormData.get("fullName"),
     email: contactFormData.get("email"),
     phone: contactFormData.get("phone"),
@@ -69,7 +73,7 @@ function addContact(event) {
   };
 
   const updatedContacts = [...contacts, newContact];
-  contacts = updatedContacts;
+  saveContacts(updatedContacts);
 
   addContactFormElement.reset();
   renderContacts();
