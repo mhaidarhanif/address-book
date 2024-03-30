@@ -2,23 +2,6 @@ const searchInputElement = document.getElementById("search-input");
 const addContactFormElement = document.getElementById("add-contact-form");
 const contactsContainerElement = document.getElementById("contacts-container");
 
-function saveContacts(contacts) {
-  localStorage.setItem("address-book", JSON.stringify(contacts));
-}
-
-function loadContacts() {
-  const contacts = localStorage.getItem("address-book");
-  if (!contacts) {
-    saveContacts([]);
-  }
-
-  try {
-    return JSON.parse(contacts);
-  } catch (error) {
-    console.error("Failed to laod contacts", error);
-  }
-}
-
 function searchContacts(contacts, keyword) {
   searchInputElement.value = keyword;
 
@@ -42,12 +25,14 @@ function renderContacts() {
 
   const contactItemElements = contactsToRender.map(
     (contact) => `<li>
-  <h2>${contact.fullName}</h2>
-  <p>${contact.email}</p>
-  <p>${contact.phone}</p>
-  <div>
-    <button onclick="deleteContactById(${contact.id})">Delete</button>
-  </div>
+  <a href="/contact/?id=${contact.id}">
+    <h2>${contact.fullName}</h2>
+    <p>${contact.email}</p>
+    <p>${contact.phone}</p>
+    <div>
+      <button onclick="deleteContactById(${contact.id})">Delete</button>
+    </div>
+  </a>
 </li>
 `
   );
@@ -90,10 +75,6 @@ function deleteContactById(id) {
   renderContacts();
 }
 
-function updateContactById(id) {
-  // update
-}
+addContactFormElement.addEventListener("submit", addContact);
 
 window.addEventListener("load", renderContacts);
-
-addContactFormElement.addEventListener("submit", addContact);
