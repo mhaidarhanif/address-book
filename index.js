@@ -29,10 +29,10 @@ function renderContacts() {
     <h2>${contact.fullName}</h2>
     <p>${contact.email}</p>
     <p>${contact.phone}</p>
-    <div>
-      <button onclick="deleteContactById(${contact.id})">Delete</button>
-    </div>
   </a>
+  <div>
+    <button onclick="deleteContactById(${contact.id})">Delete</button>
+  </div>
 </li>
 `
   );
