@@ -11,6 +11,6 @@ function loadContacts() {
   try {
     return JSON.parse(contacts);
   } catch (error) {
-    console.error("Failed to laod contacts", error);
+    console.error("Failed to load contacts", error);
   }
 }
