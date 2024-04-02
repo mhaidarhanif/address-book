@@ -57,6 +57,7 @@ function addContact(event) {
     age: Number(contactFormData.get("age")),
   };
 
+  // Update by adding a new object in the array
   const updatedContacts = [...contacts, newContact];
   saveContacts(updatedContacts);
 

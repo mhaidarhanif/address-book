@@ -7,53 +7,69 @@
     <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
-    <h1>Address Book</h1>
+    <header>
+      <h1>Address Book</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Dashboard</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-    <form id="search-contacts" method="get">
-      <input
-        id="search-input"
-        type="text"
-        name="q"
-        placeholder="Enter keyword..."
-      />
-      <button type="submit">Search</button>
-    </form>
-
-    <hr />
-
-    <form id="add-contact-form" method="post">
-      <div>
-        <label for="full-name">Full name:</label>
+    <main>
+      <form id="search-contacts" method="get">
         <input
-          id="full-name"
-          name="fullName"
+          id="search-input"
           type="text"
-          placeholder="Elon Musk"
+          name="q"
+          placeholder="Enter keyword..."
         />
-      </div>
-      <div>
-        <label for="email">Email address:</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="elon@elon.com"
-        />
-      </div>
-      <div>
-        <label for="phone">Phone number:</label>
-        <input id="phone" name="phone" type="phone" placeholder="+1234567890" />
-      </div>
-      <div>
-        <label for="age">Age:</label>
-        <input id="age" name="age" type="number" placeholder="30" />
-      </div>
-      <button type="submit">Add Contact</button>
-    </form>
+        <button type="submit">Search</button>
+      </form>
 
-    <ul id="contacts-container">
-      <!-- Contacts Data -->
-    </ul>
+      <hr />
+
+      <form id="add-contact-form" method="post">
+        <div>
+          <label for="full-name">Full name:</label>
+          <input
+            id="full-name"
+            name="fullName"
+            type="text"
+            placeholder="Elon Musk"
+          />
+        </div>
+        <div>
+          <label for="email">Email address:</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="elon@elon.com"
+          />
+        </div>
+        <div>
+          <label for="phone">Phone number:</label>
+          <input
+            id="phone"
+            name="phone"
+            type="phone"
+            placeholder="+1234567890"
+          />
+        </div>
+        <div>
+          <label for="age">Age:</label>
+          <input id="age" name="age" type="number" placeholder="30" />
+        </div>
+        <button type="submit">Add Contact</button>
+      </form>
+
+      <ul id="contacts-container">
+        <!-- Contacts Data -->
+      </ul>
+    </main>
 
     <script src="/storage.js"></script>
     <script src="/index.js"></script>

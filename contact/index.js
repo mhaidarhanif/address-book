@@ -12,22 +12,27 @@ function renderContactById() {
   const id = getCurrentContactId();
   const contact = loadContactById(id);
 
+  if (!contact) {
+    contactContainerElement.innerHTML = "<p>Contact not found</p>";
+    return;
+  }
+
   contactContainerElement.innerHTML = `
 <h2>${contact.fullName}</h2>
 <p>${contact.email}</p>
 <p>${contact.phone}</p>
 <div>
-  <button onclick="renderContactEditFormById(${contact.id})">Edit</button>
+  <button onclick="renderEditContactFormById(${contact.id})">Edit</button>
   <button onclick="deleteContactById(${contact.id})">Delete</button>
 </div>
   `;
 }
 
-function renderContactEditFormById(id) {
+function renderEditContactFormById(id) {
   const contact = loadContactById(id);
 
   contactContainerElement.innerHTML = `
-  <form id="edit-contact-form" method="post">
+<form id="edit-contact-form" method="post">
   <div>
     <label for="full-name">Full name:</label>
     <input
@@ -61,9 +66,38 @@ function renderContactEditFormById(id) {
   </div>
   <button type="submit">Save</button>
 </form>`;
+
+  const editContactFormElement = document.getElementById("edit-contact-form");
+
+  editContactFormElement.addEventListener("submit", editContact);
 }
 
-function editContactById(id) {}
+function editContact(event) {
+  event.preventDefault();
+  const contactFormData = new FormData(event.target);
+
+  const contacts = loadContacts();
+
+  const newContact = {
+    id: getCurrentContactId(),
+    fullName: contactFormData.get("fullName"),
+    email: contactFormData.get("email"),
+    phone: contactFormData.get("phone"),
+    age: Number(contactFormData.get("age")),
+  };
+
+  // Update by using map, to find by id, not adding a new one
+  const updatedContacts = contacts.map((contact) => {
+    if (contact.id === newContact.id) {
+      return newContact;
+    } else {
+      return contact;
+    }
+  });
+
+  saveContacts(updatedContacts);
+  renderContactById();
+}
 
 function deleteContactById(id) {
   const contacts = loadContacts();
