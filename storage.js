@@ -14,3 +14,10 @@ function loadContacts() {
     console.error("Failed to load contacts", error);
   }
 }
+
+function loadContactById(id) {
+  const contacts = loadContacts();
+  const contact = contacts.find((contact) => contact.id === id);
+
+  return contact;
+}
